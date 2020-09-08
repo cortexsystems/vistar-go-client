@@ -41,12 +41,12 @@ type Client interface {
 }
 
 type ClientConfig struct {
-	reqTimeout     time.Duration
-	eventFn        EventFunc
-	cacheFn        CacheFunc
-	assetTTL       time.Duration
-	expiryInterval time.Duration
-	popFunc        PoPFunc
+	ReqTimeout     time.Duration
+	EventFn        EventFunc
+	CacheFn        CacheFunc
+	AssetTTL       time.Duration
+	ExpiryInterval time.Duration
+	PoPFn          PoPFunc
 }
 
 type client struct {
@@ -65,15 +65,15 @@ type client struct {
 
 func NewClientForTesting(config *ClientConfig,
 	expiryInterval time.Duration) *client {
-	httpClient := &http.Client{Timeout: config.reqTimeout}
-	pop := NewProofOfPlay(config.eventFn, config.popFunc)
+	httpClient := &http.Client{Timeout: config.ReqTimeout}
+	pop := NewProofOfPlay(config.EventFn, config.PoPFn)
 
 	c := &client{
 		pop:              pop,
-		assetTTL:         config.assetTTL,
+		assetTTL:         config.AssetTTL,
 		httpClient:       httpClient,
-		eventFn:          config.eventFn,
-		cacheFn:          config.cacheFn,
+		eventFn:          config.EventFn,
+		cacheFn:          config.CacheFn,
 		inProgressAds:    make(map[string]Ad),
 		bandwidthStats:   make(map[string]Stats),
 		closeCh:          make(chan struct{}, 1),
@@ -85,15 +85,15 @@ func NewClientForTesting(config *ClientConfig,
 }
 
 func NewClient(config *ClientConfig) *client {
-	httpClient := &http.Client{Timeout: config.reqTimeout}
-	pop := NewProofOfPlay(config.eventFn, config.popFunc)
+	httpClient := &http.Client{Timeout: config.ReqTimeout}
+	pop := NewProofOfPlay(config.EventFn, config.PoPFn)
 
 	c := &client{
 		pop:              pop,
-		assetTTL:         config.assetTTL,
+		assetTTL:         config.AssetTTL,
 		httpClient:       httpClient,
-		eventFn:          config.eventFn,
-		cacheFn:          config.cacheFn,
+		eventFn:          config.EventFn,
+		cacheFn:          config.CacheFn,
 		inProgressAds:    make(map[string]Ad),
 		bandwidthStats:   make(map[string]Stats),
 		closeCh:          make(chan struct{}, 1),

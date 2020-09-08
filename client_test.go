@@ -34,10 +34,10 @@ func TestCacheAdsNoCacher(t *testing.T) {
 	}
 
 	config := &ClientConfig{
-		reqTimeout: time.Second,
-		eventFn:    nil,
-		cacheFn:    nil,
-		assetTTL:   time.Minute,
+		ReqTimeout: time.Second,
+		EventFn:    nil,
+		CacheFn:    nil,
+		AssetTTL:   time.Minute,
 	}
 	client := NewClient(config)
 
@@ -87,10 +87,10 @@ func TestCacheAds(t *testing.T) {
 	}
 
 	config := &ClientConfig{
-		reqTimeout: time.Second,
-		eventFn:    eventFn,
-		cacheFn:    cacheFn,
-		assetTTL:   time.Second,
+		ReqTimeout: time.Second,
+		EventFn:    eventFn,
+		CacheFn:    cacheFn,
+		AssetTTL:   time.Second,
 	}
 	client := NewClient(config)
 
@@ -392,10 +392,10 @@ func TestGetAdReturnsAd(t *testing.T) {
 	}
 
 	config := &ClientConfig{
-		reqTimeout: time.Second * 100,
-		eventFn:    nil,
-		cacheFn:    nil,
-		assetTTL:   time.Second * 100,
+		ReqTimeout: time.Second * 100,
+		EventFn:    nil,
+		CacheFn:    nil,
+		AssetTTL:   time.Second * 100,
 	}
 	client := NewClientForTesting(config, time.Millisecond*50)
 
@@ -448,10 +448,10 @@ func TestGetAdReturnsMultipleAds(t *testing.T) {
 	}
 
 	config := &ClientConfig{
-		reqTimeout: time.Second * 100,
-		eventFn:    nil,
-		cacheFn:    nil,
-		assetTTL:   time.Second * 100,
+		ReqTimeout: time.Second * 100,
+		EventFn:    nil,
+		CacheFn:    nil,
+		AssetTTL:   time.Second * 100,
 	}
 	client := NewClientForTesting(config, time.Millisecond*50)
 
@@ -490,10 +490,10 @@ func TestStopClient(t *testing.T) {
 	inProgressAds[ad2["id"].(string)] = ad2
 
 	config := &ClientConfig{
-		reqTimeout: time.Second * 100,
-		eventFn:    nil,
-		cacheFn:    nil,
-		assetTTL:   time.Second * 100,
+		ReqTimeout: time.Second * 100,
+		EventFn:    nil,
+		CacheFn:    nil,
+		AssetTTL:   time.Second * 100,
 	}
 	client := NewClientForTesting(config, time.Millisecond*50)
 	client.inProgressAds = inProgressAds
