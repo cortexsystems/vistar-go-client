@@ -312,6 +312,7 @@ func (c *client) updateBandwidthStats(url string, sentBytes int64,
 
 func (c *client) processExpiredAds() {
 	ticker := time.NewTicker(c.adExpiryInterval)
+	defer ticker.Stop()
 
 	for {
 		select {
